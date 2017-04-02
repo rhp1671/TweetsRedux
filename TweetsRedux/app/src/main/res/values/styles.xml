@@ -1,0 +1,49 @@
+<resources>
+
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="user_screen_name">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/name_font_size</item>
+    </style>
+
+    <style name="user_name">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/name_font_size</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/gray</item>
+    </style>
+
+    <style name="CustomDialog" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">false</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="login_btn" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="holoTitle" parent="@android:style/Theme.Holo.Dialog">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+    <style name="photo">
+        <item name="android:layout_marginRight">@dimen/timeline_tweet_photo_margin</item>
+        <item name="android:paddingBottom">@dimen/timeline_tweet_photo_padding</item>
+        <item name="android:paddingTop">@dimen/timeline_tweet_photo_padding</item>>
+    </style>
+</resources>

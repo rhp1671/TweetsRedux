@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menuCompose"
+        android:icon="@drawable/ic_quill_write"
+        android:onClick="onCompose"
+        android:title="@string/tweet"
+        app:showAsAction="ifRoom">
+    </item>
+    <item
+        android:id="@+id/menuProfile"
+        android:icon="@drawable/ic_profile"
+        android:onClick="onProfileView"
+        android:title="@string/profile"
+        app:showAsAction="ifRoom">
+    </item>
+</menu>
+
