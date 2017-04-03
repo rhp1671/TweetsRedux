@@ -23,9 +23,13 @@ import com.codepath.apps.kennardtweets.ui.profile.ProfileActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+
 
 public class TimelineActivity extends BaseTweetActivity {
     public static final String TAG = TimelineRecyclerAdapter.class.getName();
+
+
     @BindView(R.id.viewpager)
     ViewPager viewPager;
     @BindView(R.id.tabs)

@@ -19,6 +19,7 @@ import com.codepath.apps.kennardtweets.ui.helper.EndlessRecyclerViewScrollListen
 import com.codepath.apps.kennardtweets.utilities.Utils;
 
 import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -32,9 +33,11 @@ import static android.os.Build.VERSION_CODES.M;
 
 public class BaseTweetFragment extends Fragment {
     public static final String TAG = BaseTweetFragment.class.getName();
-    protected @BindView(R.id.lvTweets)
+    protected
+    @BindView(R.id.lvTweets)
     RecyclerView lvTweets;
-    protected @BindView((R.id.swipeContainer))
+    protected
+    @BindView((R.id.swipeContainer))
     SwipeRefreshLayout swipeContainer;
     protected ArrayList<Tweet> mTweets;
     protected TimelineRecyclerAdapter mArrayAdapter;
@@ -98,14 +101,13 @@ public class BaseTweetFragment extends Fragment {
                 view.post(new Runnable() {
                     @Override
                     public void run() {
-                        long maxId = mTweets.get(itemCt - 1).getUid() -1;
+                        long maxId = mTweets.get(itemCt - 1).getUid() - 1;
 
                         if (mMode == MODE_ALL_TWEETS) {
                             populateTimeline(maxId, 0);
                         } else {
                             populateSearchTweets(maxId, 0);
                         }
-
                     }
                 });
             }
@@ -121,20 +123,19 @@ public class BaseTweetFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mTweets = new ArrayList<>();
         mArrayAdapter = new TimelineRecyclerAdapter(getActivity(), mTweets);
-
     }
 
-    protected void populateTimeline(final long maxId, long sinceID){
+    protected void populateTimeline(final long maxId, long sinceID) {
     }
 
-    protected void populateSearchTweets(final long maxId, long sinceID){
+    protected void populateSearchTweets(final long maxId, long sinceID) {
     }
 
-    protected boolean checkNetworkConnectivity(){
+    protected boolean checkNetworkConnectivity() {
 
         boolean bReturn = true;
 
-        if (!Utils.isNetworkAvailable(getContext())){
+        if (!Utils.isNetworkAvailable(getContext())) {
             bReturn = false;
             Toast.makeText(getActivity(), R.string.network_error, Toast.LENGTH_SHORT).show();
         }

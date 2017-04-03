@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 
 
 import com.codepath.apps.kennardtweets.R;
+import com.codepath.apps.kennardtweets.ui.home.DetailActivity;
 import com.codepath.apps.kennardtweets.ui.profile.ProfileActivity;
 import com.codepath.apps.kennardtweets.utilities.Utils;
 import com.codepath.apps.kennardtweets.models.Tweet;
@@ -50,6 +51,7 @@ public class TimelineRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         @BindView(R.id.tvUserName) TextView tvUserName;
         @BindView(R.id.tvCreatedDate) TextView tvCreatedDate;
         private int mPosition;
+        private Tweet mTweet;
 
         public BasicViewHolder(View view) {
             super(view);
@@ -58,21 +60,29 @@ public class TimelineRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                Tweet t = mTweets.get(mPosition);
-                    if (t != null){
-                        String screenName = t.getUser().getScreenName();
-                        if (screenName != null){
+                    if (mTweet != null){
+                        if (mTweet.getUser().getScreenName() != null){
                             Intent intent = new Intent(mContext, ProfileActivity.class);
-                            intent.putExtra("screenName", screenName);
+                            intent.putExtra("screenName", mTweet.getUser().getScreenName());
                              mContext.startActivity(intent);
                         }
                     }
+                }
+            });
+
+            view.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                        Intent intent = new Intent(mContext, DetailActivity.class);
+                        intent.putExtra("tweet", mTweet);
+                        mContext.startActivity(intent);
+
                 }
             });
         }
 
 
         public void renderTweet(Tweet tweet){
+            this.mTweet = tweet;
             imageView.setImageResource(0);
             if (tweet != null) {
                 tvScreenUserName.setText(tweet.getUser().getScreenName());

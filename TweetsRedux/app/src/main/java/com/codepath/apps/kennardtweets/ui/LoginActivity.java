@@ -1,6 +1,7 @@
 package com.codepath.apps.kennardtweets.ui;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.codepath.apps.kennardtweets.R;
 import com.codepath.apps.kennardtweets.TwitterApp;
+import com.codepath.apps.kennardtweets.databinding.ActivityLoginBinding;
 import com.codepath.apps.kennardtweets.models.User;
 import com.codepath.apps.kennardtweets.network.TwitterClient;
 import com.codepath.apps.kennardtweets.ui.home.TimelineActivity;
@@ -24,18 +26,17 @@ import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 
 public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
-
+    ActivityLoginBinding binding;
     public static final String TAG = LoginActivity.class.getName();
-    @BindView(R.id.btnOauth)
     Button btnOauth;
-    @BindView(R.id.pbProfile)
     ProgressBar pbProfile;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
+		 super.onCreate(savedInstanceState);
+		binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         ButterKnife.bind(this);
+        btnOauth = binding.btnOauth;
+        pbProfile = binding.pbProfile;
 	}
 
 

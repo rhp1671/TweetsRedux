@@ -1,10 +1,10 @@
-# Assignment 3 - *Simple Twitter Client (Android)*
+# Assignment 4 - *Twitter Client with Fragments (Android)*
 
 **Overview: Build a simple Twitter client that supports viewing a Twitter timeline and composing a new tweet.**
 
 Submitted by: **RPrasad**
 
-Time spent: **22** hours spent in total
+Time spent: **28** hours spent in total
 
 
 ##User Stories:
@@ -15,36 +15,33 @@ User Stories:
 
 The following user stories must be completed:
 
-* [X] User can sign in to Twitter using OAuth login (2 points)
-* [X] User can view the tweets from their home timeline (4 points)
-* [X] User should be displayed the username, name, and body for each tweet
-* [X] User should be displayed the relative timestamp for each tweet "8m", "7h"
-* [X] User can view more tweets as they scroll with infinite pagination
-* [X] User can compose a new tweet (4 points)
+* [X] Includes all required user stories from Week 3 Twitter Client
+* [X] User can switch between Timeline and Mention views using tabs. (3 points)
+* [X] User can view their home timeline tweets.
+* [X] User can view the recent mentions of their username.
+* [X] User can navigate to view their own profile (2 points)
+* [X] User can see picture, tagline, # of followers, # of following, and tweets on their profile.
+* [X] User can click on the profile image in any tweet to see another user's profile. (3 points)
+* [X] User can see picture, tagline, # of followers, # of following, and tweets of clicked user.
+* [X] Profile view should include that user's timeline
+* [X] User can infinitely paginate any of these timelines (home, mentions, user) by scrolling to the bottom (2 points)
 
+The following advanced user stories are optional:
 
-* The following advanced user stories are optional:
-
-* [X] While composing a tweet, user can see a character counter with characters remaining for tweet out of 140 (1 point)
-* [X] Links in tweets are clickable and will launch the web browser (see autolink) (1 point)
-* [X] User can refresh tweets timeline by pulling down to refresh (i.e pull-to-refresh) (1 point)
-* [] User can open the twitter app offline and see last loaded tweets
-* [] Tweets are persisted into sqlite and can be displayed from the local DB (2 points)
-* [] User can tap a tweet to display a "detailed" view of that tweet (2 points)
-* [] User can select "reply" from detail view to respond to a tweet (1 point)
-* [] Improve the user interface and theme the app to feel "twitter branded" (1 to 5 points)
-* [] Stretch: User can see embedded image media within the tweet detail view (1 point)
-* [] Stretch: User can watch embedded video within the tweet (1 point)
-* [X] Stretch: Compose activity is replaced with a modal overlay (2 points)
+* [X] Robust error handling, check if internet is available, handle error cases, network failures (1 point)
+* [X] When a network request is sent, user sees an indeterminate progress indicator (1 point)
+* [] User can "reply" to any tweet on their home timeline (1 point)
+* [] The user that wrote the original tweet is automatically "@" replied in compose (1 point)
+* [X] User can click on a tweet to be taken to a "detail view" of that tweet (1 point)
+* [] User can take favorite (and unfavorite) or retweet actions on a tweet (1 point)
+* [X] Improve the user interface and theme the app to feel "twitter branded" (1 to 5 points)
+* [X] User can view following / followers list through the profile (1 point)
+* [X] User can search for tweets matching a particular query and see results (2 points)
+* [] Usernames and hashtags are styled + clickable within tweets using clickable spans (1 point)
 * [X] Stretch: Use Parcelable instead of Serializable using the popular Parceler library. (1 point)
-* [X] Stretch: Leverage RecyclerView as a replacement for the ListView and ArrayAdapter for all lists of tweets. (2 points)
-* [X] Stretch: Move the "Compose" action to a FloatingActionButton instead of on the AppBar. (1 point)
-* [X] Stretch: On the Twitter timeline, leverage the CoordinatorLayout to apply scrolling behavior that hides / shows the toolbar. (1 point)
-* [] Stretch: Replace all icon drawables and other static image assets with vector drawables where appropriate. (1 point)
 * [X] Stretch: Leverage the data binding support module to bind data into one or more activity or fragment layout templates. (1 point)
-* [X] Stretch: Replace Picasso with Glide for more efficient image rendering. (1 point)
-* [] Stretch: Enable your app to receive implicit intents from other apps. When a link is shared from a web browser, it should pre-fill the text and title of the web page when composing a tweet. (1 point)
-* [] Stretch: When a user leaves the compose view without publishing and there is existing text, prompt to save or delete the draft. If saved, the draft should then be persisted to disk and can later be resumed from the compose view. (2 points)
+* [X] Stretch: On the profile screen, leverage the CoordinatorLayout to apply scrolling behavior as the user scrolls through the profile timeline. (1 point)
+* []  Stretch: User can view their Twitter direct messages (and/or send new ones) (2 points)
 
 
 

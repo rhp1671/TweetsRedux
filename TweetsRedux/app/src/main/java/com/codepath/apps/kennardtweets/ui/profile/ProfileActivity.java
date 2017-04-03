@@ -4,17 +4,12 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-
 import com.codepath.apps.kennardtweets.R;
 import com.codepath.apps.kennardtweets.ui.base.BaseTweetActivity;
 
-import static com.raizlabs.android.dbflow.config.FlowLog.Level.D;
-
 public class ProfileActivity extends BaseTweetActivity implements ProfileHeaderFragment.ProfileHeaderClickListener {
 
-
-    @Override
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String screenName = getIntent().getStringExtra("screenName");
@@ -35,6 +30,7 @@ public class ProfileActivity extends BaseTweetActivity implements ProfileHeaderF
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         showToolbarIcon(false);
+
     }
 
 
