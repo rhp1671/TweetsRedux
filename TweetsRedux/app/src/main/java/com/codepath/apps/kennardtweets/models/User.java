@@ -4,8 +4,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by raprasad on 3/24/17.
@@ -19,6 +22,7 @@ public class User implements Parcelable{
     private String profileImageUrl;
     private String tagline;
     private int followersCount;
+    private int followingsCount;
 
     public String getTagline() {
         return tagline;
@@ -32,7 +36,7 @@ public class User implements Parcelable{
         return followingsCount;
     }
 
-    private int followingsCount;
+
 
     public String getName() {
         return "@"+name;
@@ -49,6 +53,27 @@ public class User implements Parcelable{
     public String getProfileImageUrl() {
         return profileImageUrl.replace("_normal", "");
     }
+
+    public static ArrayList fromJSONArray(JSONArray array){
+        ArrayList<User> users = new ArrayList<>();
+
+        for (int i = 0; i < array.length() ; i++){
+            try {
+                JSONObject j = array.getJSONObject(i);
+                if (j != null){
+                    User u = User.fromJSON(j);
+                    if (u != null){
+                        users.add(u);
+                    }
+                }
+            } catch (JSONException e){
+                e.printStackTrace();
+                continue;
+            }
+        }
+        return users;
+    }
+
 
     public static User fromJSON(JSONObject json) {
         User user = null;

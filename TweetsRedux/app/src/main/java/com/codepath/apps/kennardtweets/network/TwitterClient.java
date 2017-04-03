@@ -4,11 +4,18 @@ import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import static com.codepath.apps.kennardtweets.ui.home.TimelineActivity.TAG;
 
 /*
  * 
@@ -34,6 +41,9 @@ public class TwitterClient extends OAuthBaseClient {
     public static final String GET_USER = "account/verify_credentials.json";
     public static final String GET_USER_TIMELINE = "statuses/user_timeline.json";
     public static final String GET_USER_PROFILE = "users/show.json";
+    public static final String GET_FOLLOWING = "friends/list.json";
+    public static final String GET_FOLLOWERS = "followers/list.json";
+    public static final String SEARCH_TWEETS="search/tweets.json";
 
     public TwitterClient(Context context) {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
@@ -132,6 +142,58 @@ public class TwitterClient extends OAuthBaseClient {
         }
         client.get(apiUrl, params, handler);
     }
+
+
+    public void getFollowing(long userID,
+                             JsonHttpResponseHandler handler) {
+        String apiUrl = getApiUrl(GET_FOLLOWING);
+        RequestParams params = new RequestParams();
+
+            if (userID != 0) {
+                params.put("user_id", userID);
+            }
+             params.put("count", 25);
+
+        client.get(apiUrl, params, handler);
+    }
+
+    public void getFollowers(long userID,
+                             JsonHttpResponseHandler handler) {
+        String apiUrl = getApiUrl(GET_FOLLOWERS);
+        RequestParams params = new RequestParams();
+
+        if (userID != 0) {
+            params.put("user_id", userID);
+        }
+        params.put("count", 25);
+
+        client.get(apiUrl, params, handler);
+    }
+
+    public void searchTweets(String search, long maxId, long sinceID,
+                             JsonHttpResponseHandler handler) {
+        String apiUrl = getApiUrl(SEARCH_TWEETS);
+
+        RequestParams params = new RequestParams();
+       // params.put("count", 25);
+        if (sinceID != 0) {
+            params.put("since_id", sinceID);
+        }
+        if (maxId != 0) {
+            params.put("max_id", maxId);
+        }
+        if (search != null && !search.isEmpty()) {
+            String encoded = "";
+            try{
+                encoded = URLEncoder.encode(search,"UTF-8");
+            } catch (UnsupportedEncodingException e){
+                Log.d(TAG, e.getMessage());
+            }
+
+            params.put("q", encoded);
+        }
+        client.get(apiUrl, params, handler);
+        }
 
 
 }

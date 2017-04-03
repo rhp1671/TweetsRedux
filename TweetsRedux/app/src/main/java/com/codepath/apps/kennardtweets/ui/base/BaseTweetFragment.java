@@ -10,16 +10,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.codepath.apps.kennardtweets.R;
 import com.codepath.apps.kennardtweets.adapters.TimelineRecyclerAdapter;
 import com.codepath.apps.kennardtweets.models.Tweet;
 import com.codepath.apps.kennardtweets.ui.helper.EndlessRecyclerViewScrollListener;
+import com.codepath.apps.kennardtweets.utilities.Utils;
 
 import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.R.attr.mode;
+import static android.os.Build.VERSION_CODES.M;
 
 
 /**
@@ -36,6 +40,10 @@ public class BaseTweetFragment extends Fragment {
     protected TimelineRecyclerAdapter mArrayAdapter;
     protected LinearLayoutManager linearLayoutManager;
     private EndlessRecyclerViewScrollListener scrollListener;
+    protected int MODE_SEARCH_TWEETS = 0;
+    protected int MODE_ALL_TWEETS = 1;
+    protected int mMode = MODE_ALL_TWEETS;
+    protected String mQuery;
 
     @Nullable
     @Override
@@ -64,10 +72,18 @@ public class BaseTweetFragment extends Fragment {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (mTweets.size() < 1) {
-                    populateTimeline(0, 1);
+                if (mMode == MODE_ALL_TWEETS) {
+                    if (mTweets.size() < 1) {
+                        populateTimeline(0, 1);
+                    } else {
+                        populateTimeline(mTweets.get(mTweets.size() - 1).getUid() - 1, 0);
+                    }
                 } else {
-                    populateTimeline(mTweets.get(mTweets.size() - 1).getUid() -1 , 0);
+                    if (mTweets.size() < 1) {
+                        populateSearchTweets(0, 1);
+                    } else {
+                        populateSearchTweets(mTweets.get(mTweets.size() - 1).getUid() - 1, 0);
+                    }
                 }
             }
         });
@@ -83,7 +99,13 @@ public class BaseTweetFragment extends Fragment {
                     @Override
                     public void run() {
                         long maxId = mTweets.get(itemCt - 1).getUid() -1;
-                        populateTimeline(maxId, 0);
+
+                        if (mMode == MODE_ALL_TWEETS) {
+                            populateTimeline(maxId, 0);
+                        } else {
+                            populateSearchTweets(maxId, 0);
+                        }
+
                     }
                 });
             }
@@ -99,8 +121,24 @@ public class BaseTweetFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mTweets = new ArrayList<>();
         mArrayAdapter = new TimelineRecyclerAdapter(getActivity(), mTweets);
+
     }
 
     protected void populateTimeline(final long maxId, long sinceID){
     }
+
+    protected void populateSearchTweets(final long maxId, long sinceID){
+    }
+
+    protected boolean checkNetworkConnectivity(){
+
+        boolean bReturn = true;
+
+        if (!Utils.isNetworkAvailable(getContext())){
+            bReturn = false;
+            Toast.makeText(getActivity(), R.string.network_error, Toast.LENGTH_SHORT).show();
+        }
+        return bReturn;
+    }
+
 }

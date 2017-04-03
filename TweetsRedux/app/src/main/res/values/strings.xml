@@ -8,4 +8,9 @@
     <string name="oauth_login">Login with Twitter</string>
     <string name="logo">What\'s Happening?</string>
     <string name="profile">Profile</string>
+    <string name = "following"><![CDATA[<b>%1$d</b> FOLLOWING]]></string>
+    <string name = "followers"><![CDATA[<b>%1$d</b> FOLLOWERS]]></string>
+    <string name = "userfollowing">FOLLOWING</string>
+    <string name = "userfollowers">FOLLOWERS</string>
+    <string name = "network_error">Please check your network and try again!</string>>
 </resources>

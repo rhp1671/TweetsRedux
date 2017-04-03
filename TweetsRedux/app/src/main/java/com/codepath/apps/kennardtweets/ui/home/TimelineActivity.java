@@ -1,13 +1,17 @@
 package com.codepath.apps.kennardtweets.ui.home;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem    ;
+import android.widget.EditText;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.apps.kennardtweets.R;
@@ -66,6 +70,7 @@ public class TimelineActivity extends BaseTweetActivity {
         ButterKnife.bind(this);
         viewPager.setAdapter(new TweetPagerAdapter(getSupportFragmentManager()));
         pagerSlidingTabStrip.setViewPager(viewPager);
+        showToolbarIcon(true);
     }
 
 

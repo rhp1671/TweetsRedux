@@ -34,29 +34,30 @@ public class MentionsTimelineFragment extends BaseTweetFragment {
     }
 
     @Override
-    protected void populateTimeline(final long maxId, long sinceID){
-
-        client.getMentionsTimeLine(maxId, sinceID, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                super.onSuccess(statusCode, headers, response);
-                ArrayList a = Tweet.fromJSONArray(response);
-                if (maxId == 0){
-                    mTweets = mArrayAdapter.swap(a);
-                } else {
-                    mTweets =  mArrayAdapter.add(a);
+    protected void populateTimeline(final long maxId, long sinceID) {
+        if (checkNetworkConnectivity()) {
+            client.getMentionsTimeLine(maxId, sinceID, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                    super.onSuccess(statusCode, headers, response);
+                    ArrayList a = Tweet.fromJSONArray(response);
+                    if (maxId == 0) {
+                        mTweets = mArrayAdapter.swap(a);
+                    } else {
+                        mTweets = mArrayAdapter.add(a);
+                    }
+                    Log.d("debug", response.toString());
+                    swipeContainer.setRefreshing(false);
                 }
-                Log.d("debug", response.toString());
-                swipeContainer.setRefreshing(false);
-            }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-                Log.d("debug", errorResponse.toString());
-                swipeContainer.setRefreshing(false);
-            }
-        });
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                    Log.d("debug", errorResponse.toString());
+                    swipeContainer.setRefreshing(false);
+                }
+            });
+        }
     }
 }
 

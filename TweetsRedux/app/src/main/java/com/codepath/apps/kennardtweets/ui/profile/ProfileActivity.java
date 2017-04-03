@@ -4,11 +4,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.codepath.apps.kennardtweets.R;
 import com.codepath.apps.kennardtweets.ui.base.BaseTweetActivity;
 
-public class ProfileActivity extends BaseTweetActivity {
+import static com.raizlabs.android.dbflow.config.FlowLog.Level.D;
+
+public class ProfileActivity extends BaseTweetActivity implements ProfileHeaderFragment.ProfileHeaderClickListener {
 
 
     @Override
@@ -24,11 +27,14 @@ public class ProfileActivity extends BaseTweetActivity {
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //TextView tvTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         setSupportActionBar(toolbar);
+        //tvTitle.setText(R.string.profile);
         getSupportActionBar().setTitle(getResources().getString(R.string.profile));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        showToolbarIcon(false);
     }
 
 
@@ -48,4 +54,19 @@ public class ProfileActivity extends BaseTweetActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    public void onClick(long userID, int clickID, String name) {
+            UserListFragment userFragment = UserListFragment.newInstance(userID, clickID);
+            getSupportFragmentManager().beginTransaction().replace(R.id.framelayoutProfile, userFragment).commit();
+            String title;
+            if (clickID == ProfileHeaderFragment.CLICK_FOLLOWERS){
+                title = getResources().getString(R.string.userfollowers);
+            } else {
+                title = getResources().getString(R.string.userfollowing);
+            }
+            getSupportActionBar().setTitle(title + " : " + name);
+    }
+
 }

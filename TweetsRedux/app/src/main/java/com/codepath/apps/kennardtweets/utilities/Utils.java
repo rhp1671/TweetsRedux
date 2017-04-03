@@ -1,5 +1,11 @@
 package com.codepath.apps.kennardtweets.utilities;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Build;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.format.DateUtils;
 
 import java.text.ParseException;
@@ -89,6 +95,21 @@ public class Utils {
 
     public static int daysBetween(Date d1, Date d2) {
         return (int) ((d2.getTime() - d1.getTime()) / DateUtils.DAY_IN_MILLIS);
+    }
+
+    public static Spanned fromHtml(String source) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            return Html.fromHtml(source);
+        }
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 
 }
